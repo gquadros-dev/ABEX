@@ -1,4 +1,4 @@
-# [Nome do Brechó Online] - Projeto ABEX
+# Brechó Online - Projeto ABEX
 
 ## 🛍️ Sobre o Projeto
 
