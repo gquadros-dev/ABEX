@@ -1,50 +1,63 @@
-# Welcome to your Expo app 👋
+# [Nome do Brechó Online] - Projeto ABEX
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+## 🛍️ Sobre o Projeto
 
-## Get started
+Este é o projeto de um brechó online, desenvolvido como parte da disciplina/metodologia **ABEX (Aprendizado Baseado em Experiências)**. A ideia é criar uma plataforma (web e mobile) onde os usuários possam comprar e vender roupas, acessórios e outros itens de segunda mão, incentivando a moda sustentável e o consumo consciente.
 
-1. Install dependencies
+## 🎯 Contexto
 
-   ```bash
-   npm install
-   ```
+Este projeto está sendo construído com o objetivo de aplicar na prática os conhecimentos adquiridos, promovendo o aprendizado através da experiência e do desenvolvimento de uma solução real.
 
-2. Start the app
+## 💻 Tecnologias Utilizadas
 
-   ```bash
-   npx expo start
-   ```
+* **Frontend:** React Native (visando compatibilidade para Web e Mobile)
+* **Backend:** (A definir ou especificar, ex: Node.js, Firebase, etc.)
+* **Banco de Dados:** (A definir ou especificar)
 
-In the output, you'll find options to open the app in a
+## ✨ Status Atual
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+* Fase inicial de planejamento e configuração do ambiente de desenvolvimento.
+* (Você pode atualizar esta seção conforme o projeto avança, ex: "Desenvolvimento das telas de login e cadastro", "Implementação do catálogo de produtos", etc.)
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## 🚀 Como Iniciar (Ambiente de Desenvolvimento)
 
-## Get a fresh project
+1.  **Clone o repositório:**
+    ```bash
+    git clone [URL_DO_SEU_REPOSITORIO_AQUI]
+    ```
+2.  **Acesse a pasta do projeto:**
+    ```bash
+    cd [NOME_DA_PASTA_DO_PROJETO]
+    ```
+3.  **Instale as dependências:**
+    ```bash
+    npm install
+    # ou, se você usar Yarn:
+    # yarn install
+    ```
+4.  **Para rodar o projeto (Mobile):**
+    * **Android:**
+        ```bash
+        npm run android
+        # ou: yarn android
+        ```
+    * **iOS (requer macOS e Xcode):**
+        ```bash
+        npm run ios
+        # ou: yarn ios
+        ```
+5.  **Para rodar o projeto (Web - se estiver usando Expo Web ou React Native for Web):**
+    ```bash
+    npm run web
+    # ou: yarn web
+    ```
 
-When you're ready, run:
+    *(Certifique-se de ter o ambiente React Native/Expo configurado corretamente na sua máquina.)*
 
-```bash
-npm run reset-project
-```
+## 👥 Equipe (Opcional)
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+* [Seu Nome ou Nomes dos Integrantes] - [Papel no Projeto, ex: Desenvolvedor Frontend]
 
-## Learn more
+---
 
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+*Este README é um documento vivo e será atualizado à medida que o projeto evolui.*
