@@ -7,15 +7,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   container: {
-    flexDirection: 'row', // Mantém a direção em linha
-    flexWrap: 'wrap',     // Mantém a quebra de linha
-    justifyContent: 'space-between', // Mantém o espaçamento
-    paddingHorizontal: '2%',
-    paddingTop: 10,
-    paddingBottom: 20,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    paddingHorizontal: '1%',
+    paddingBottom: 60,
   },
   produto: {
-    marginBottom: 20,
+    marginBottom: 2,
     alignItems: 'center',
     borderRadius: 16,
     padding: 8,
