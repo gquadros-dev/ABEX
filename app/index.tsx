@@ -1,19 +1,21 @@
-import { Produto } from "@/classes/produto";
-import Badge from "@/components/badge";
-import Navbar from "@/components/navbar";
-import { MOCK_PRODUTOS } from "@/mock/produtos";
-import { Link } from "expo-router";
-import { useEffect, useState } from "react";
 import {
   Image,
   ScrollView,
   Text,
   TouchableOpacity,
   View,
-  useWindowDimensions
+  useWindowDimensions,
+  ActivityIndicator,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import Navbar from "@/components/navbar";
+import { Produto } from "@/classes/produto";
+import { useEffect, useState } from "react";
+import Badge from "@/components/badge";
 import Styles from "./styles";
+import { MOCK_PRODUTOS } from "@/mock/produtos";
+import { Link } from "expo-router";
+import SearchBar from "@/components/searchBar";
 
 export default function Index() {
   const { width } = useWindowDimensions();
@@ -22,6 +24,8 @@ export default function Index() {
   const productWidth = width * (percentage / 100);
 
   const [produtos, setProdutos] = useState<Produto[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const getProdutos = async (): Promise<Produto[]> => {
     // try {
@@ -40,62 +44,77 @@ export default function Index() {
     return new Promise(resolve => {
       setTimeout(() => {
         resolve(MOCK_PRODUTOS);
-      }, 500);
+      }, 2000);
     });
   }
 
   useEffect(() => {
-    getProdutos().then((data) => setProdutos(data));
+    getProdutos().then((data) => {
+      setProdutos(data);
+      setLoading(false);
+    });
   }, []);
 
   return (
     <SafeAreaView style={Styles.safeArea}>
+      <SearchBar
+        value={searchQuery}
+        onChangeText={setSearchQuery}
+        placeholder="Pesquisar no Garimpo Online"
+      />
       <ScrollView
         contentContainerStyle={[
           Styles.container,
           { paddingBottom: 80 },
         ]}
       >
-        {produtos.map((produto) => (
-          <Link
-            key={`link-${produto.id}`}
-            href={{
-              pathname: "/produto/[id]",
-              params: { id: produto.id },
-            }}
-            asChild
-          >
-            <TouchableOpacity>
-              <View
-                style={[
-                  Styles.produto,
-                  { width: productWidth }
-                ]}
-              >
-                <Image
-                  source={{ uri: produto.fotoPath || "" }}
-                  style={Styles.productImage}
-                />
-                <View style={Styles.productDescription}>
-                  <View style={{ flexDirection: "row", gap: 4 }}>
-                    {produto.disponibilidade === "Esgotado" ? (
-                      <Badge label="Esgotado" color="#E53E3E" />
-                    ):(
-                      <>
-                        <Badge label="Sale" />
-                        <Badge label="Choice" color="#cedb37" />
-                      </>
-                    )}
-                  </View>
-                  <View>
-                    <Text style={{}}>{produto.nome}</Text>
-                    <Text style={{ fontWeight: 'bold', fontSize: 16}}>R$ {Number(produto.preco).toFixed(2).replace('.', ',')}</Text>
+        {loading ? (
+          // Enquanto carrega os produtos, mostra um indicador
+          <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', height: 300 }}>
+            <ActivityIndicator size="large" color="#7B42F6" />
+          </View>
+        ) : (
+          produtos.map((produto) => (
+            <Link
+              key={`link-${produto.id}`}
+              href={{
+                pathname: "/produto/[id]",
+                params: { id: produto.id },
+              }}
+              asChild
+            >
+              <TouchableOpacity>
+                <View
+                  style={[
+                    Styles.produto,
+                    { width: productWidth }
+                  ]}
+                >
+                  <Image
+                    source={{ uri: produto.fotoPath || "" }}
+                    style={Styles.productImage}
+                  />
+                  <View style={Styles.productDescription}>
+                    <View style={{ flexDirection: "row", gap: 4 }}>
+                      {produto.disponibilidade === "Esgotado" ? (
+                        <Badge label="Esgotado" color="#E53E3E" />
+                      ):(
+                        <>
+                          <Badge label="Sale" />
+                          <Badge label="Choice" color="#cedb37" />
+                        </>
+                      )}
+                    </View>
+                    <View>
+                      <Text style={{}}>{produto.nome}</Text>
+                      <Text style={{ fontWeight: 'bold', fontSize: 16}}>R$ {Number(produto.preco).toFixed(2).replace('.', ',')}</Text>
+                    </View>
                   </View>
                 </View>
-              </View>
-            </TouchableOpacity>
-          </Link>
-        ))}
+              </TouchableOpacity>
+            </Link>
+          ))
+        )}
       </ScrollView>
       <Navbar />
     </SafeAreaView>

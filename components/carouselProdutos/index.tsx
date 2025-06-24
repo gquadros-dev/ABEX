@@ -1,38 +1,31 @@
-import React, { useEffect, useState } from "react";
-import { ScrollView, View, Image, Text } from "react-native";
+import React from 'react';
+import { View, ScrollView, Image, Text } from 'react-native';
+import { Produto } from '@/classes/produto';
+import Styles from './styles';
 
-import { Produto } from "@/classes/produto";
-import { MOCK_PRODUTOS } from "@/mock/produtos";
+type CarrosselProdutosProps = {
+  produtos: Produto[];
+};
 
-import Styles from "./styles";
-
-// Definimos as propriedades que o nosso componente vai receber
-
-const CarouselProdutos = () => {
-  const [produtos, setProdutos] = useState<Produto[]>([]);
-
-  const getProdutos = async (): Promise<Produto[]> => {
-      return new Promise(resolve => {
-        setTimeout(() => {
-          resolve(MOCK_PRODUTOS);
-        }, 500);
-      });
-    }
-
-    useEffect(() => {
-      getProdutos().then((data) => setProdutos(data));
-    }, []);
-
+const CarrosselProdutos: React.FC<CarrosselProdutosProps> = ({ produtos }) => {
   return (
-    <View style={Styles.card}>
-      <Text>Produtos similares:</Text>
-      <View style={Styles.cardContent}>
+    <View style={Styles.container}>
+      <Text style={Styles.title}>Produtos similares:</Text>
+      <ScrollView
+        horizontal={true}
+        contentContainerStyle={Styles.scrollViewContainer}
+      >
         {produtos.map((produto) => (
-          <Image key={produto.id} source={{ uri: produto.fotoPath }} style={Styles.image} />
+          <View key={produto.id} style={Styles.produtoContainer}>
+            <Image
+              source={{ uri: produto.fotoPath || '' }}
+              style={Styles.productImage}
+            />
+          </View>
         ))}
-      </View>
+      </ScrollView>
     </View>
   );
 };
 
-export default CarouselProdutos;
+export default CarrosselProdutos;

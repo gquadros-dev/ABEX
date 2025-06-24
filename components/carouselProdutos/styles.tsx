@@ -1,22 +1,32 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
-  card: {
-    flex: 1,
+  container: {
+    paddingHorizontal: 16,
     backgroundColor: "#E5E7EB", // Um cinza claro
     borderRadius: 16,
-    padding: 12,
-    marginVertical: 10,
-    overflow: "scroll",
+    paddingVertical: 12,
   },
-  cardContent: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+  scrollViewContainer: {
+    gap: 10,
   },
-  image: {
+  produtoContainer: {
     width: 100,
+    backgroundColor: '#f8f8f8',
+    borderRadius: 16,
+    overflow: 'hidden',
+    borderWidth: 1,
+    borderColor: '#eee',
+  },
+  productImage: {
+    width: '100%',
     height: 100,
+    resizeMode: 'cover',
+  },
+  title: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 8,
   }
 });
 

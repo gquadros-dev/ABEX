@@ -1,25 +1,39 @@
-import { useState } from "react";
+import CarrosselProdutos from "@/components/carouselProdutos";
+import VendedorBadge from "@/components/vendedorBadge";
+import { MOCK_PRODUTOS } from "@/mock/produtos";
+import { useLocalSearchParams, useRouter } from "expo-router";
+import { useEffect, useState } from "react";
 import {
-  View,
-  Text,
+  Alert,
   Image,
   ScrollView,
+  Text,
   TouchableOpacity,
-  Alert
+  View
 } from "react-native";
-import { useLocalSearchParams, useRouter } from "expo-router";
-import { MOCK_PRODUTOS } from "@/mock/produtos";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import Styles from "./styles";
-import VendedorBadge from "@/components/vendedorBadge";
-import CarouselProdutos from "@/components/carouselProdutos";
+import { Produto } from "@/classes/produto";
 
 
 export default function ProdutoDetalhe() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const produto = MOCK_PRODUTOS.find((p) => p.id.toString() === id);
   const router = useRouter();
+  const [produtos, setProdutos] = useState<Produto[]>([]);
+
+  const getProdutos = async (): Promise<Produto[]> => {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        resolve(MOCK_PRODUTOS);
+      }, 500);
+    });
+  }
+
+  useEffect(() => {
+    getProdutos().then((data) => setProdutos(data));
+  }, []);
 
   const [isFavorited, setIsFavorited] = useState(false);
 
@@ -41,7 +55,6 @@ export default function ProdutoDetalhe() {
   const handleAddToCart = () => {
     Alert.alert("Adicionado!", `${produto.nome} foi adicionado ao carrinho.`);
   };
-
   return (
     <SafeAreaView style={Styles.safeArea}>
       <ScrollView contentContainerStyle={{ paddingBottom: 100 }}>
@@ -88,8 +101,8 @@ export default function ProdutoDetalhe() {
               descricao="Eu gosto de vender minhas roupas usadas para que pessoas possam usar do mesmo que eu..."
               vendasNoMes={4}
             />
-            
-            <CarouselProdutos />
+
+            <CarrosselProdutos produtos={produtos} />
           </View>
         </View>
       </ScrollView>
